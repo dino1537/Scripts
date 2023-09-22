@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Check if mplayer and fzf are installed
-if ! command -v mplayer &> /dev/null; then
-    echo "mplayer is not installed. Please install it to play songs."
+# Check if mpv --no-video and fzf are installed
+if ! command -v mpv --no-video &> /dev/null; then
+    echo "mpv --no-video is not installed. Please install it to play songs."
     exit 1
 fi
 
@@ -19,8 +19,8 @@ song_file=$(find "$music_folder" -type f -name "*.mp3" -o -name "*.flac" | fzf -
 
 # Check if a song file was selected
 if [ -n "$song_file" ]; then
-    # Play the selected song using mplayer
-    mplayer "$song_file"
+    # Play the selected song using mpv --no-video
+    mpv --no-video "$song_file"
 else
     echo "No song file selected."
     exit 1
