@@ -91,7 +91,7 @@ function delete_event {
 
 # Function to read user input with a prompt
 function read_user_input {
-    read -p "$1 " input
+    read -r -p "$1 " input
     echo "$input"
 }
 
@@ -124,7 +124,7 @@ function read_time_input {
 # Main loop
 while true; do
     show_menu
-    read choice
+    read -r choice
     case $choice in
         1) add_event ;;
         2) view_agenda ;;
