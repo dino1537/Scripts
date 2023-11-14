@@ -20,7 +20,7 @@ song_file=$(find "$music_folder" -type f -name "*.mp3" -o -name "*.flac" | fzf -
 # Check if a song file was selected
 if [ -n "$song_file" ]; then
     # Play the selected song using mpv --no-video
-    mpv --no-video "$song_file"
+    mpv --no-video --no-terminal "$song_file" &
 else
     echo "No song file selected."
     exit 1
