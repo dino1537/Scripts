@@ -41,9 +41,9 @@ complex_password=$(generate_complex_password 23)
 echo "Generated complex password: $complex_password"
 
 # Save the password along with date and time to the file
-echo "Date: $(date)" >> "$file_name"
-echo "Generated Password: $complex_password" >> "$file_name"
-echo "-------------------" >> "$file_name"
+   echo "Date: $(date)" >> "$file_name"
+   echo "Generated Password: $complex_password" >> "$file_name"
+   echo "-------------------" >> "$file_name"
 
 echo "Password saved to $file_name"
 
