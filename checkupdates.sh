@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check for updates in the background and redirect output to a file
-(pacman -Sy > /dev/null 2>&1) &
+(pacman -Syy > /dev/null 2>&1) &
 (pacman -Qu | awk '{print $1}' > /tmp/updates.txt) &
 
 # Wait for both background processes to finish
