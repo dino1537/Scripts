@@ -16,5 +16,9 @@ mpc clear
 if [ -n "$selected_files" ]; then
   echo "$selected_files" | xargs -d '\n' -I{} mpc add "{}"
   mpc play
+
+# Display a notification for the currently playing song
+  current_song=$(mpc current)
+  notify-send "Now Playing" "$current_song"
 fi
 
