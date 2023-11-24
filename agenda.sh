@@ -7,6 +7,9 @@ CROSS="✖"
 # Define the agenda file name
 AGENDA_FILE="agenda.txt"
 
+# Define the valid event types
+VALID_EVENT_TYPES=("Meeting" "Task" "Reminder")
+
 # Function to display the menu
 function show_menu {
     echo "Please choose an option:"
@@ -19,8 +22,15 @@ function show_menu {
 
 # Function to add an event
 function add_event {
-    # Ask for the event type
-    event_type=$(read_user_input "Enter event type (Meeting/Task/Reminder):")
+    # Ask for the event type and validate it
+    while true; do
+        event_type=$(read_user_input "Enter event type (Meeting/Task/Reminder):")
+        if [[ " ${VALID_EVENT_TYPES[@]} " =~ " ${event_type} " ]]; then
+            break
+        else
+            echo "${CROSS} Invalid event type. Please enter 'Meeting', 'Task', or 'Reminder'."
+        fi
+    done
 
     # Ask for the event date and validate it
     event_date=$(read_date_input "Enter event date (dd-mm-yy):")
@@ -121,6 +131,21 @@ function read_time_input {
     done
 }
 
+# Function to send a notification
+function send_notification {
+    event_date_time="$1"
+    event_description="$2"
+
+    # Use the 'date' command to get the current date and time in the same format
+    current_date_time=$(date "+%d-%m-%y %H:%M")
+
+    # Compare the current date and time with the event date and time
+    if [[ "$current_date_time" == "$event_date_time" ]]; then
+        # If they match, send a notification
+        notify-send "Agenda Alert" "$event_description"
+    fi
+}
+
 # Main loop
 while true; do
     show_menu
@@ -133,5 +158,10 @@ while true; do
         5) exit 0 ;;
         *) echo "${CROSS} Invalid option" ;;
     esac
+    # Send notifications for all events
+    while read -r line; do
+        event_date_time=$(echo "$line" | cut -d' ' -f1,2)
+        event_description=$(echo "$line" | cut -d' ' -f3-)
+        send_notification "$event_date_time" "$event_description"
+    done < "$AGENDA_FILE"
 done
-
