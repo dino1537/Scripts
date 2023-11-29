@@ -15,7 +15,7 @@ fi
 music_folder="/home/dino/Music"
 
 # Use fzf to interactively select a song file
-song_file=$(find "$music_folder" -type f -name "*.mp3" -o -name "*.flac" | fzf --preview "echo 'Now Playing: {}'")
+song_file=$(find "$music_folder" -type f \( -iname "*.mp3" -o -iname "*.flac" -o -iname "*.wav" -o -iname "*.m4a" -o -iname "*.ogg" -o -iname "*.aac" \) | fzf --preview "echo 'Now Playing: {}'")
 
 # Check if a song file was selected
 if [ -n "$song_file" ]; then
@@ -28,4 +28,3 @@ fi
 
 # Exit the script
 exit 0
-

@@ -25,7 +25,7 @@ function add_event {
     # Ask for the event type and validate it
     while true; do
         event_type=$(read_user_input "Enter event type (Meeting/Task/Reminder):")
-        if [[ " ${VALID_EVENT_TYPES[@]} " =~ " ${event_type} " ]]; then
+        if [[ " ${VALID_EVENT_TYPES[@]} " =~  " ${event_type} "  ]]; then
             break
         else
             echo "${CROSS} Invalid event type. Please enter 'Meeting', 'Task', or 'Reminder'."
@@ -136,10 +136,10 @@ function send_notification {
     event_date_time="$1"
     event_description="$2"
 
-    # Use the 'date' command to get the current date and time in the same format
+# Use the 'date' command to get the current date and time in the same format
     current_date_time=$(date "+%d-%m-%y %H:%M")
 
-    # Compare the current date and time with the event date and time
+# Compare the current date and time with the event date and time
     if [[ "$current_date_time" == "$event_date_time" ]]; then
         # If they match, send a notification
         notify-send "Agenda Alert" "$event_description"

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the directory where notes will be stored
-NOTES_DIR="$HOME/notes"
+NOTES_DIR="$HOME/.notes/"
 
 # Ensure the notes directory exists
 if [ ! -d "$NOTES_DIR" ]; then
