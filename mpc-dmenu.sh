@@ -7,7 +7,7 @@ MUSIC_DIR="/home/dino/Music"
 cd "$MUSIC_DIR" || exit
 
 # Use rofi to select music files and append them to the current playlist
-selected_files=$(find . -type f \( -name "*.mp3" -o -name "*.ogg" -o -name "*.wav" -o -name "*.flac" \) -printf "%P\n" | dmenu -i -l 10 -p "Select music files:")
+selected_files=$(find . -type f \( -name "*.mp3" -o -name "*.m4a" -o -name "*.ogg" -o -name "*.wav" -o -name "*.flac" \) -printf "%P\n" | dmenu -i -l 10 -p "Select music files:")
 
 # Clear the playlist before adding the selected songs
 mpc clear
